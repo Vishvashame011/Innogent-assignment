@@ -99,7 +99,7 @@ class SimpleLoanCalculator implements LoanCalculator {
     }
 }
 
-// ===== 7. Single Responsibility: BankService SIP =====
+// ==== 7. Single Responsibility: BankService SIP ====
 class BankService {
     public void deposit(Account account, double amount) {
         account.deposit(amount);
