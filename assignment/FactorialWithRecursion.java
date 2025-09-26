@@ -19,7 +19,7 @@ public class FactorialWithRecursion {
 
         // Recursive case: n! = n * (n-1)!
         // factorial(n.subtract(BigInteger.ONE)) creates a new stack frame for the recursive call
-        // n.subtract(BigInteger.ONE) returns a new BigInteger object on the Heap
+        // n.subtract(BigInteger.ONE)  returns a new BigInteger object on the Heap
         return n.multiply(factorial(n.subtract(BigInteger.ONE)));
         // multiply() also creates a new BigInteger object on the Heap and returns its reference.
     }
