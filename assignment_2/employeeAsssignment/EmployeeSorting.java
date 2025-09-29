@@ -1,4 +1,4 @@
-package employeeAsssignment;
+package assignment_2.employeeAsssignment;
 
 
 import java.util.*;
