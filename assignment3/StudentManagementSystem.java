@@ -289,20 +289,20 @@ public class StudentManagementSystem {
 
 
         System.out.println("\n Female students, records 1–2 (ordered by ID default):");
-        List<Student> female1to9 = studentManagementSystem.filterStudents(Gender.FEMALE, 0, 2, "id");
-        studentManagementSystem.printStudents(female1to9);
+        List<Student> female1to2 = studentManagementSystem.filterStudents(Gender.FEMALE, 0, 2, "id");
+        studentManagementSystem.printStudents(female1to2);
 
         System.out.println("\n Male students, records 2-6, ordered by name:");
-        List<Student> male7to8 = studentManagementSystem.filterStudents(Gender.MALE, 2, 6, "name");
-        studentManagementSystem.printStudents(male7to8);
+        List<Student> male2to6 = studentManagementSystem.filterStudents(Gender.MALE, 2, 6, "name");
+        studentManagementSystem.printStudents(male2to6);
 
         System.out.println("\n Female students, records 1-5, ordered by marks:");
         List<Student> female1to5Marks = studentManagementSystem.filterStudents(Gender.FEMALE, 1, 5, "marks");
         studentManagementSystem.printStudents(female1to5Marks);
 
         System.out.println("\n Male students, records 1-6, ordered by marks:");
-        List<Student> male9to50Marks = studentManagementSystem.filterStudents(Gender.MALE, 1, 6, "marks");
-        studentManagementSystem.printStudents(male9to50Marks);
+        List<Student> male1to6Marks = studentManagementSystem.filterStudents(Gender.MALE, 1, 6, "marks");
+        studentManagementSystem.printStudents(male1to6Marks);
 
 
         System.out.println("\n Delete student id=1:");
