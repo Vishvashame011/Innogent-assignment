@@ -3,6 +3,7 @@ package assignment3;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StudentManagementSystem {
 
@@ -178,12 +179,34 @@ public class StudentManagementSystem {
         }
     }
 
-    // Pagination
-    public List<Student> paginate(List<Student> students, int fromIndex, int toIndex) {
-        if (fromIndex >= students.size()) return Collections.emptyList();
-        toIndex = Math.min(toIndex, students.size());
-        return students.subList(fromIndex, toIndex);
+
+    // pagination filters
+    public List<Student> filterStudents(Gender gender, int fromIndex, int toIndex, String orderBy) {
+        // filter
+        Stream<Student> stream = studentList.stream();
+        if (gender != null) {
+            stream = stream.filter(s -> s.getGender() == gender);
+        }
+
+        // sorting
+        if ("name".equalsIgnoreCase(orderBy)) {
+            stream = stream.sorted(Comparator.comparing(Student::getName));
+        } else if ("marks".equalsIgnoreCase(orderBy)) {
+            stream = stream.sorted(Comparator.comparingInt(Student::getMarks).reversed());
+        } else {
+            stream = stream.sorted(Comparator.comparingInt(Student::getId)); // default
+        }
+
+        // collecting after sorting
+        List<Student> sorted = stream.collect(Collectors.toList());
+
+        // pagination
+        if (fromIndex >= sorted.size()) return Collections.emptyList();
+        toIndex = Math.min(toIndex, sorted.size());
+        return sorted.subList(fromIndex, toIndex);
     }
+
+
 
     // Print student info
     public void printStudents(List<Student> students) {
@@ -264,10 +287,23 @@ public class StudentManagementSystem {
         System.out.println("\n Failed Students:");
         studentManagementSystem.printStudents(studentManagementSystem.getFailedStudents(null, null, null, null, null));
 
-        System.out.println("\n Pagination Example (first 2 students sorted by marks):");
-        List<Student> sorted = new ArrayList<>(studentManagementSystem.studentList);
-        sorted.sort((s1, s2) -> s2.getMarks() - s1.getMarks());
-        studentManagementSystem.printStudents(studentManagementSystem.paginate(sorted, 0, 2));
+
+        System.out.println("\n Female students, records 1–2 (ordered by ID default):");
+        List<Student> female1to9 = studentManagementSystem.filterStudents(Gender.FEMALE, 0, 2, "id");
+        studentManagementSystem.printStudents(female1to9);
+
+        System.out.println("\n Male students, records 2-6, ordered by name:");
+        List<Student> male7to8 = studentManagementSystem.filterStudents(Gender.MALE, 2, 6, "name");
+        studentManagementSystem.printStudents(male7to8);
+
+        System.out.println("\n Female students, records 1-5, ordered by marks:");
+        List<Student> female1to5Marks = studentManagementSystem.filterStudents(Gender.FEMALE, 1, 5, "marks");
+        studentManagementSystem.printStudents(female1to5Marks);
+
+        System.out.println("\n Male students, records 1-6, ordered by marks:");
+        List<Student> male9to50Marks = studentManagementSystem.filterStudents(Gender.MALE, 1, 6, "marks");
+        studentManagementSystem.printStudents(male9to50Marks);
+
 
         System.out.println("\n Delete student id=1:");
         studentManagementSystem.deleteStudent(1);
