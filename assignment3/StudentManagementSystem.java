@@ -569,8 +569,8 @@ public class StudentManagementSystem {
         List<Student> male2to6 = studentManagementSystem.filterStudents(Gender.MALE, 2, 6, "name");
         studentManagementSystem.printStudents(male2to6);
 
-        System.out.println("\nDelete student id=1:");
-        studentManagementSystem.deleteStudent(1);
+        System.out.println("\nDelete student id=:4");
+        studentManagementSystem.deleteStudent(4);
         studentManagementSystem.printStudents(studentManagementSystem.studentList);
 
         // Save all data before exiting
