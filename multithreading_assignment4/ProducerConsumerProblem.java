@@ -126,8 +126,8 @@ public class ProducerConsumerProblem {
         consumer.start();
 
 
-            producer.join();
-            consumer.join();
+        producer.join();
+        consumer.join();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
