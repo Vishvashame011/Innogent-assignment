@@ -1,4 +1,4 @@
-package multithreading_assignment4;
+package multithreading_assignment5;
 
 class NumberPrinter {
     private int number = 1;
